@@ -37,6 +37,11 @@ public class TodoController {
 		this.todoRepository = todoRepository;
 	}
 
+	@GetMapping("/all")
+	public List<Todo> getAllTodos() {
+		return todoRepository.findAll();
+	}
+
 	@GetMapping("/{userId}")
 	public ResponseEntity<List<Todo>> getAllCommentsByTutorialId(@PathVariable(value = "userId") Long userId) {
 		if (!userRepository.existsById(userId)) {

@@ -110,7 +110,7 @@ export default function UpdateUser() {
                         className="alert alert-warning"
                      />
 
-                     <div className="form-group d-flex justify-content-center">
+                     <div className="d-flex justify-content-center">
                         <div className="mt-2" style={{ fontSize: 22 }}>
                            Username
                         </div>
@@ -118,6 +118,7 @@ export default function UpdateUser() {
                            <Field type="text" className="form-control" name="username" />
                         </div>
                      </div>
+
                      <div className="d-flex justify-content-center">
                         <div className="mt-2" style={{ fontSize: 22 }}>
                            Email
@@ -126,28 +127,31 @@ export default function UpdateUser() {
                            <Field type="text" className="form-control" name="email" />
                         </div>
                      </div>
-                     <div className="d-flex justify-content-center">
-                        <div className="mt-2" style={{ fontSize: 22 }}>
-                           Email Verified
-                        </div>
-                        <div className="" >
-                           <Field type="checkbox" className="form-check" name="emailVerified" />
-                        </div>
-                     </div>
+
                      <div className="d-flex justify-content-center">
                         <div className="mt-2" style={{ fontSize: 22 }}>
                            Password
                         </div>
-                        <div className="" >
-                           <Field type="text" className="form-check" name="password" />
+                        <div className="col-md-4" >
+                           <Field type="password" className="form-control" name="password" />
                         </div>
                      </div>
+
                      <div className="d-flex justify-content-center">
                         <div className="mt-2" style={{ fontSize: 22 }}>
                            Role
                         </div>
                         <div className="" >
-                           <Field type="text" className="form-check" name="roles" />
+                           <Field type="text" className="form-control" name="roles" />
+                        </div>
+                     </div>
+
+                     <div className="d-flex justify-content-center">
+                        <div className="mt-2" style={{ fontSize: 22 }}>
+                           Email Verified
+                        </div>
+                        <div className="" >
+                           <Field type="checkbox" className="form-check " name="emailVerified" />
                         </div>
                      </div>
 

@@ -1,6 +1,9 @@
 import authHeader from '../services/auth-header'
 import { apiClient } from './ApiClient'
 
+export const getAllTodos
+    = () => apiClient.get(`todos/all`, { headers: authHeader() })
+
 export const getAllTodosForUserId
     = (userId) => apiClient.get(`todos/${userId}`, { headers: authHeader() })
 

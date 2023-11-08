@@ -70,7 +70,6 @@ export default class App extends Component {
             {showAdminBoard && (
               <NavDropdown title="Admin" id="basic-nav-dropdown">
                 <NavDropdown.Item href="/userList">User List</NavDropdown.Item>
-                <NavDropdown.Item href="/userList">All Todo List</NavDropdown.Item>
               </NavDropdown>
             )}
 

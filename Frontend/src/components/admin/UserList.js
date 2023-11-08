@@ -34,7 +34,7 @@ export default function UserList() {
     };
 
     return (
-        <div className="container text-center">
+        <div className="container text-center w-75">
             <h1>Users </h1>
             <table className="table">
                 <thead>
