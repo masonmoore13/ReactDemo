@@ -4,7 +4,7 @@ import { apiClient } from './ApiClient'
 export const getAllUsers
     = () => apiClient.get(`users/all`, { headers: authHeader() })
 
-export const deleteUser
+export const deleteUserById
     = (userId) => apiClient.delete(`users/${userId}`, { headers: authHeader() })
 
 export const getUserById

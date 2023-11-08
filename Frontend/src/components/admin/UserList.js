@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { getAllUsers } from "../../api/UserApis";
+import { deleteUserById, getAllUsers } from "../../api/UserApis";
 
 
 export default function UserList() {
@@ -22,9 +22,20 @@ export default function UserList() {
         refreshUsers();
     }, [])
 
+    const deleteUser = async (id) => {
+        deleteUserById(id)
+            .then(() => {
+                setMessage(`Successfully deleted todo ${id}`)
+                refreshUsers()
+            })
+            .catch((error) => {
+                console.log(error.message);
+            })
+    };
+
     return (
         <div className="container text-center">
-            <h1>Users <a className="btn btn-success mb-2">Create User</a></h1>
+            <h1>Users </h1>
             <table className="table">
                 <thead>
                     <tr>
@@ -42,19 +53,16 @@ export default function UserList() {
                                 <tr key={users.id}>
                                     <td>{users.username}</td>
                                     <td>{users.email}</td>
-
-
                                     {users.roles.map(
                                         roles => (
-                                            
-                                                <td key={roles.id}>{roles.name}</td>
+                                            <td key={roles.id}>{roles.name}</td>
                                         )
                                     )
                                     }
                                     <td>{users.emailVerified.toString()}</td>
                                     <td><Link className="btn btn-success" to={`${users.id}`}>Update</Link></td>
                                     <td><button className="btn btn-warning"
-                                        // onClick={() => deleteTodo(users.id)}
+                                        onClick={() => deleteUser(users.id)}
                                     >Delete</button></td>
                                 </tr>)
                         )
