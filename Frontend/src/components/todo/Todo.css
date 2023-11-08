@@ -1,0 +1,13 @@
+.label,
+input {
+    margin: 10px;
+    padding: 5px;
+}
+
+.btn {
+    font-size: 12pt;
+}
+
+.deleteAlert{
+    width: 200px;
+}

@@ -1,0 +1,35 @@
+.calcCard {
+    background-color: rgb(54, 54, 54);
+    width: 300px;
+    height: 421px;
+    padding: 5px;
+    margin: 13px;
+    border-radius: 7px;
+}
+
+.display {
+    background-color: rgb(60, 61, 66);
+    font-size: 37pt;
+    font-weight: 500;
+    text-align: end;
+    color: white;
+    margin: 2.5px;
+    min-height:78px;
+    padding-right: 5px;
+    border-radius: 5px;
+    padding-bottom: 2px;
+}
+
+.calcCol {
+    margin: 3px;
+    background-color: rgb(48, 4, 207);
+    height: 60px;
+    border-radius: 20px;
+}
+
+.equals {
+    background-color: red;
+    margin: 2.5px;
+    width: 49%;
+    border-radius: 25px;
+}
