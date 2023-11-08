@@ -126,7 +126,7 @@ export default function UpdateTodo() {
                                 <div className="mt-2" style={{ fontSize: 22 }}>
                                     Completed?
                                 </div>
-                                <div className="" >
+                                <div className="mt-2" >
                                     <Field type="checkbox" className="form-check" name="done" />
                                 </div>
                             </div>

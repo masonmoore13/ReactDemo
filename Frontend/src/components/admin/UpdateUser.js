@@ -2,7 +2,6 @@ import { ErrorMessage, Field, Form, Formik } from 'formik'
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { createUser, getUserById, updateUser } from '../../api/UserApis'
-import AuthService from '../../services/auth.service'
 
 export default function UpdateUser() {
 
@@ -12,19 +11,16 @@ export default function UpdateUser() {
    const [email, setEmail] = useState('')
    const [emailVerified, setEmailVerified] = useState('')
    const [password, setPassword] = useState('')
-   const [roles, setRoles] = useState('')
-
-   const user = AuthService.getCurrentUser();
+   const [roleName, setRoleName] = useState('')
+   const [roleId, setRoleId] = useState('')
 
    const navigate = useNavigate()
 
-   //Call the retrieveTodo function with the paramater from URL
    useEffect(
       () => getUser(),
       [id]
    )
 
-   // //Retrieve todo info to fill out forms unless id=-1 for todo creation
    function getUser() {
       if (id != -1) {
          getUserById(id)
@@ -33,7 +29,8 @@ export default function UpdateUser() {
                setEmail(response.data.email)
                setEmailVerified(response.data.emailVerified)
                setPassword(response.data.password)
-               setRoles(response.data.roles)
+               setRoleName(response.data.roles[0].name)
+               setRoleId(response.data.roles[0].id)
             })
             .catch(error => console.log(error))
       }
@@ -41,18 +38,30 @@ export default function UpdateUser() {
 
    function onSubmit(values) {
       console.log(values)
+      
+      let roleId = values.roleId;
 
+      if (values.roleName == "ROLE_ADMIN") { 
+         roleId = 1
+      }
+      if (values.roleName == "ROLE_MODERATOR") { 
+         roleId = 2
+      }
+      if (values.roleName == "ROLE_USER") { 
+         roleId = 3
+      }
+   
       const user = {
          id: id,
          username: values.username,
          email: values.email,
          emailVerified: values.emailVerified,
          password: values.password,
-         roles: values.roles
+         roles: [{ id: roleId, name: values.roleName }]
+
       }
 
-      console.log(user)
-
+      //creates user if url param is -1, sent from "createUser"
       if (id == -1) {
          createUser(user)
             .then(response => {
@@ -80,7 +89,6 @@ export default function UpdateUser() {
       //    errors.targetDate = 'Enter a target date'
       // }
 
-      console.log(values)
       return errors
    }
 
@@ -88,7 +96,7 @@ export default function UpdateUser() {
       <div className="container text-center">
          <h1>Enter Todo Details </h1>
 
-         <Formik initialValues={{ username, email, emailVerified, password, roles }}
+         <Formik initialValues={{ username, email, emailVerified, password, roleName, roleId }}
             enableReinitialize={true}
             onSubmit={onSubmit}
             validate={validate}
@@ -96,7 +104,7 @@ export default function UpdateUser() {
             validateOnBlur={false}
          >
             {
-               (props) => (
+               (values) => (
                   <Form>
                      <ErrorMessage
                         name="description"
@@ -120,7 +128,7 @@ export default function UpdateUser() {
                      </div>
 
                      <div className="d-flex justify-content-center">
-                        <div className="mt-2" style={{ fontSize: 22 }}>
+                        <div className="mt-2 ml-5" style={{ fontSize: 22 }}>
                            Email
                         </div>
                         <div className="col-md-4" >
@@ -137,20 +145,22 @@ export default function UpdateUser() {
                         </div>
                      </div>
 
-                     <div className="d-flex justify-content-center">
-                        <div className="mt-2" style={{ fontSize: 22 }}>
+                     <div className="d-flex justify-content-center" >
+                        <div className="m-1" style={{ fontSize: 22 }}>
                            Role
                         </div>
-                        <div className="" >
-                           <Field type="text" className="form-control" name="roles" />
-                        </div>
+                        <Field name="roleName" component="select" className="ml-2 ">
+                           <option name="roleName" value="ROLE_ADMIN">ROLE_ADMIN</option>
+                           <option name="roleName" value="ROLE_MODERATOR">ROLE_MODERATOR</option>
+                           <option name="roleName" value="ROLE_USER">ROLE_USER</option>
+                        </Field>
                      </div>
 
                      <div className="d-flex justify-content-center">
                         <div className="mt-2" style={{ fontSize: 22 }}>
                            Email Verified
                         </div>
-                        <div className="" >
+                        <div className="mt-2" >
                            <Field type="checkbox" className="form-check " name="emailVerified" />
                         </div>
                      </div>
